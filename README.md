@@ -7,6 +7,10 @@
 **Fork**  
 This is a fork of linuxserver/docker-beets that uses Python 3. This fork also includes the `gmusicapi` pip package for the [Gmusic Plugin](https://beets.readthedocs.io/en/v1.4.7/plugins/gmusic.html).
 
+Be aware that this forks Dockerfile generates a larger image than the linuxserver image.  
+Also, be aware that this container will take longer to build (due to pip building `lxml`).
+
+
 ## Usage
 
 ```
