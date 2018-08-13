@@ -3,8 +3,8 @@ FROM lsiobase/alpine:3.7
 # set version label
 ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="sparklyballs"
+LABEL build_version="version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="thetarkus"
 
 RUN \
  echo "**** install build packages ****" && \
@@ -21,7 +21,7 @@ RUN \
 	openjpeg-dev \
 	libxml2-dev \
 	libxslt-dev \
-	python2-dev && \
+	python3-dev && \
  echo "**** install runtime packages ****" && \
  apk add --no-cache \
 	curl \
@@ -38,8 +38,8 @@ RUN \
 	mpg123 \
 	nano \
 	openjpeg \
-	py2-gobject3 \
-	py2-pip \
+	py3-gobject3 \
+	py3-pip \
 	python2 \
 	sqlite-libs \
 	tar \
@@ -66,7 +66,7 @@ RUN \
  make && \
  make install && \
  echo "**** install pip packages ****" && \
- pip install --no-cache-dir -U \
+ pip3 install --no-cache-dir -U \
 	beautifulsoup4 \
 	beets \
 	beets-copyartifacts \
