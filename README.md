@@ -1,35 +1,19 @@
-[linuxserverurl]: https://linuxserver.io
-[forumurl]: https://forum.linuxserver.io
-[ircurl]: https://www.linuxserver.io/irc/
-[podcasturl]: https://www.linuxserver.io/podcast/
-[appurl]: http://beets.io/
-[hub]: https://hub.docker.com/r/linuxserver/beets/
-
-[![linuxserver.io](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/linuxserver_medium.png)][linuxserverurl]
-
-The [LinuxServer.io][linuxserverurl] team brings you another container release featuring easy user mapping and community support. Find us for support at:
-* [forum.linuxserver.io][forumurl]
-* [IRC][ircurl] on freenode at `#linuxserver.io`
-* [Podcast][podcasturl] covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
-
-# linuxserver/beets
-[![](https://images.microbadger.com/badges/version/linuxserver/beets.svg)](https://microbadger.com/images/linuxserver/beets "Get your own version badge on microbadger.com")[![](https://images.microbadger.com/badges/image/linuxserver/beets.svg)](https://microbadger.com/images/linuxserver/beets "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/beets.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/linuxserver/beets.svg)][hub][![Build Status](https://ci.linuxserver.io/buildStatus/icon?job=Docker-Builders/x86-64/x86-64-beets)](https://ci.linuxserver.io/job/Docker-Builders/job/x86-64/job/x86-64-beets/)
+# beets
 
 [Beets][appurl] is a music library manager and not, for the most part, a music player. It does include a simple player plugin and an experimental Web-based player, but it generally leaves actual sound-reproduction to specialized tools.
 
-[![beets](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/beets-icon.png)][appurl]
 
 ## Usage
 
 ```
 docker create \
---name=beets \
--v <path to config>:/config \
--v <path to music>:/music \
--v <path to non-processed music>:/downloads \
--e PGID=<gid> -e PUID=<uid>  \
--p 8337:8337 \
-linuxserver/beets
+    --name=beets \
+    -v <path to config>:/config \
+    -v <path to music>:/music \
+    -v <path to non-processed music>:/downloads \
+    -e PGID=<gid> -e PUID=<uid>  \
+    -p 8337:8337 \
+    thetarkus/beets
 ```
 
 ## Parameters
@@ -47,7 +31,7 @@ http://192.168.x.x:8080 would show you what's running INSIDE the container on po
 * `-e PGID` for GroupID - see below for explanation
 * `-e PUID` for UserID - see below for explanation
 
-It is based on alpine linux with s6 overlay, for shell access whilst the container is running do `docker exec -it beets /bin/bash`.
+It is based on alpine linux with s6 overlay, for shell access whilst the container is running do `docker exec -it beets /bin/sh`.
 
 ### User / Group Identifiers
 
@@ -56,7 +40,7 @@ Sometimes when using data volumes (`-v` flags) permissions issues can arise betw
 In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as below:
 
 ```
-  $ id <dockeruser>
+$ id <dockeruser>
     uid=1001(dockeruser) gid=1001(dockergroup) groups=1001(dockergroup)
 ```
 
@@ -66,7 +50,7 @@ Edit the config file in /config
 
 To edit the config from within the container use `beet config -e`
 
-For a command prompt as user abc `docker exec -it -u abc beets bash`
+For a command prompt as user abc `docker exec -it -u abc beets /bin/sh`
 
 See [Beets][appurl] for more info.
 
@@ -82,12 +66,13 @@ Contains [beets-copyartifacts](https://github.com/sbarakat/beets-copyartifacts) 
 
 * image version number
 
-`docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/beets`
+`docker inspect -f '{{ index .Config.Labels "build_version" }}' thetarkus/beets`
 
 
 ## Versions
 
-+ **12.08.18:** Add requests pip package.
++ **12.09.18:** Python2 -> python3.
++ **12.08.18:** Add requests pip package, add gmusicapi pip package.
 + **04.03.18:** Upgrade mp3gain to 1.6.1.
 + **02.01.18:** Deprecate cpu_core routine lack of scaling.
 + **27.12.17:** Add beautifulsoup4 pip package.
