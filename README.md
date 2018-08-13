@@ -1,7 +1,11 @@
 # beets
 
-[Beets][appurl] is a music library manager and not, for the most part, a music player. It does include a simple player plugin and an experimental Web-based player, but it generally leaves actual sound-reproduction to specialized tools.
+[Beets](http://beets.io) is a music library manager and not, for the most part, a music player. It does include a simple player plugin and an experimental Web-based player, but it generally leaves actual sound-reproduction to specialized tools.
 
+<img src="https://github.com/thetarkus/docker-beets/raw/master/beet.png" alt="beets logo" width="100px"/>
+
+**Fork**  
+This is a fork of linuxserver/docker-beets that uses Python 3. This fork also includes the `gmusicapi` pip package for the [Gmusic Plugin](https://beets.readthedocs.io/en/v1.4.7/plugins/gmusic.html).
 
 ## Usage
 
@@ -17,12 +21,6 @@ docker create \
 ```
 
 ## Parameters
-
-`The parameters are split into two halves, separated by a colon, the left hand side representing the host and the right the container side.
-For example with a port -p external:internal - what this shows is the port mapping from internal to external of the container.
-So -p 8080:80 would expose port 80 from inside the container to be accessible from the host's IP on port 8080
-http://192.168.x.x:8080 would show you what's running INSIDE the container on port 80.`
-
 
 * `-p 8337` - the port(s)
 * `-v /config` - Configuration files
@@ -52,7 +50,7 @@ To edit the config from within the container use `beet config -e`
 
 For a command prompt as user abc `docker exec -it -u abc beets /bin/sh`
 
-See [Beets][appurl] for more info.
+See [Beets](http://beets.io) for more info.
 
 Contains [beets-copyartifacts](https://github.com/sbarakat/beets-copyartifacts) plugin, [configuration details](https://github.com/sbarakat/beets-copyartifacts#configuration)
 
