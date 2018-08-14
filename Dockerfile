@@ -74,6 +74,7 @@ RUN \
     beets \
     beets-copyartifacts \
     discogs-client \
+    gmusicapi \
     flask \
     pillow \
     pip \
