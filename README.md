@@ -33,17 +33,8 @@ docker create \
 * `-e PGID` for GroupID - see below for explanation
 * `-e PUID` for UserID - see below for explanation
 
-It is based on alpine linux with s6 overlay, for shell access whilst the container is running do `docker exec -it beets /bin/sh`.
+For shell access whilst the container is running, run `docker exec -it beets sh`.
 
-### User / Group Identifiers
-
-Sometimes when using data volumes (`-v` flags) permissions issues can arise between the host OS and the container. We avoid this issue by allowing you to specify the user `PUID` and group `PGID`. Ensure the data volume directory on the host is owned by the same user you specify and it will "just work" ™.
-
-In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as below:
-
-```
-$ id <dockeruser> uid=1001(dockeruser) gid=1001(dockergroup) groups=1001(dockergroup)
-```
 
 ## Setting up the application
 
@@ -51,23 +42,16 @@ Edit the config file in /config
 
 To edit the config from within the container use `beet config -e`
 
-For a command prompt as user abc `docker exec -it -u abc beets /bin/sh`
-
 See [Beets](http://beets.io) for more info.
 
 Contains [beets-copyartifacts](https://github.com/sbarakat/beets-copyartifacts) plugin, [configuration details](https://github.com/sbarakat/beets-copyartifacts#configuration)
+
 
 ## Info
 
 * To monitor the logs of the container in realtime `docker logs -f beets`.
 
-* container version number
-
-`docker inspect -f '{{ index .Config.Labels "build_version" }}' beets`
-
-* image version number
-
-`docker inspect -f '{{ index .Config.Labels "build_version" }}' thetarkus/beets`
+* Import music `docker exec -it beets sh -c "beet import /downloads"`
 
 
 ## Versions

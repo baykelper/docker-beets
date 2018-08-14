@@ -43,7 +43,7 @@ RUN \
     openjpeg \
     py3-gobject3 \
     py3-pip \
-    python2 \
+    python3 \
     sqlite-libs \
     tar \
     wget && \
@@ -74,7 +74,6 @@ RUN \
     beets \
     beets-copyartifacts \
     discogs-client \
-    gmusicapi \
     flask \
     pillow \
     pip \
@@ -82,6 +81,11 @@ RUN \
     pylast \
     requests \
     unidecode && \
+  \
+  \
+  echo "**** create user ****" && \
+  addgroup -S beets && \
+  adduser --shell /bin/sh -S beets -G beets && \
   \
   \
   echo "**** cleanup ****" && \
@@ -96,8 +100,11 @@ EDITOR="nano" \
 HOME="/config"
 
 # copy local files
-COPY root/ /
+COPY files/ /
 
 # ports and volumes
 EXPOSE 8337
 VOLUME /config /downloads /music
+
+# entrypoint
+CMD ["/entrypoint.sh"]
