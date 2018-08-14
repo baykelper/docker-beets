@@ -71,7 +71,7 @@ RUN \
   echo "**** install pip packages ****" && \
   pip3 install --no-cache-dir -U \
     beautifulsoup4 \
-    beets \
+    git+https://github.com/beetbox/beets \
     beets-copyartifacts \
     discogs-client \
     gmusicapi \
@@ -108,4 +108,4 @@ EXPOSE 8337
 VOLUME /config /downloads /music
 
 # entrypoint
-CMD ["/entrypoint.sh"]
+CMD ["/init.sh"]

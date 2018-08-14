@@ -1,11 +1,16 @@
 # beets
 
-[Beets](http://beets.io) is a music library manager and not, for the most part, a music player. It does include a simple player plugin and an experimental Web-based player, but it generally leaves actual sound-reproduction to specialized tools.
+[Beets](http://beets.io) is the media library management system for
+obsessive-compulsive music geeks.
 
-<img src="https://github.com/thetarkus/docker-beets/raw/master/beet.png" alt="beets logo" width="100px"/>
+![beets logo](https://github.com/thetarkus/docker-beets/raw/master/beet-150px.png)
 
 **Fork**  
-This is a fork of linuxserver/docker-beets that uses Python 3. This fork also includes the `gmusicapi` pip package for the [Gmusic Plugin](https://beets.readthedocs.io/en/v1.4.7/plugins/gmusic.html).
+This is a fork of linuxserver/docker-beets.
+This fork runs Python 3.
+This fork pulls the latest master of Beets from GitHub.
+This fork includes the `gmusicapi` pip package for the
+[Gmusic Plugin](https://beets.readthedocs.io/en/v1.4.7/plugins/gmusic.html).
 
 Be aware that this forks Dockerfile generates a larger image than the linuxserver image.  
 Also, be aware that this container will take longer to build (due to pip building `lxml`).
@@ -18,8 +23,8 @@ docker create \
     --name=beets \
     -v <path to config>:/config \
     -v <path to music>:/music \
-    -v <path to non-processed music>:/downloads \
-    -e PGID=<gid> -e PUID=<uid>  \
+    -v <path to non-processed music>:/import \
+    -e PGID=<gid> -e PUID=<uid> \
     -p 8337:8337 \
     thetarkus/beets
 ```
@@ -29,33 +34,38 @@ docker create \
 * `-p 8337` - the port(s)
 * `-v /config` - Configuration files
 * `-v /music` - Music library location
-* `-v /downloads` - Non-processed music
-* `-e PGID` for GroupID - see below for explanation
-* `-e PUID` for UserID - see below for explanation
+* `-v /import` - Non-processed music
+* `-e PGID` for GroupID
+* `-e PUID` for UserID
 
 For shell access whilst the container is running, run `docker exec -it beets sh`.
 
 
-## Setting up the application
+## Configuration
 
-Edit the config file in /config
+Initial run of the docker container will create the config files for you, if
+they do not exist already.
 
-To edit the config from within the container use `beet config -e`
+Edit `config.yaml` in your /config directory.
+To edit the config from within the container, run `beet config -e`.
 
-See [Beets](http://beets.io) for more info.
+When adding or removing the `web` plugin, you must restart the container.  
+View all plugins and how to configure them at the
+[beets docs](https://beets.readthedocs.io/en/v1.4.7/plugins/index.html).
 
-Contains [beets-copyartifacts](https://github.com/sbarakat/beets-copyartifacts) plugin, [configuration details](https://github.com/sbarakat/beets-copyartifacts#configuration)
+Contains [beets-copyartifacts](https://github.com/sbarakat/beets-copyartifacts)
+plugin, [configuration details](https://github.com/sbarakat/beets-copyartifacts#configuration)
 
 
-## Info
+## Commands
 
 * To monitor the logs of the container in realtime `docker logs -f beets`.
-
-* Import music `docker exec -it beets sh -c "beet import /downloads"`
+* Import music `docker exec -it beets beet import /import"`
 
 
 ## Versions
 
++ **2018-08-14:** Use Beets master from GitHub instead of pip.
 + **2018-08-13:** Upgrade to python 3, alpine 3.8, mp3gain 1.6.2.
 + **2018-08-12:** Add requests pip package, add gmusicapi pip package.
 + **2018-03-04:** Upgrade mp3gain to 1.6.1.

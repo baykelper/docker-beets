@@ -1,5 +1,4 @@
 #!/bin/sh
-/bin/sh
 
 # defaults
 [[ ! -e /config/beets.sh ]] && cp /defaults/beets.sh /config/beets.sh
@@ -9,9 +8,11 @@
 chown -R beets:beets /config
 
 # run
-if [ $# -eq 0 ]; then
-  su - beets -c "BEETSDIR='$BEETSDIR' beet web"
-  while sleep 3600; do :; done
-else
-  beet $@
-fi
+run_beet() {
+  grep "^plugins:.*web" /config/config.yaml && \
+    su - beets -c "BEETSDIR='$BEETSDIR' beet $1 &"
+}
+
+run_beet web
+run_beet bpd
+sleep 2147483647d
