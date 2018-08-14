@@ -7,6 +7,10 @@
 **Fork**  
 This is a fork of linuxserver/docker-beets that uses Python 3. This fork also includes the `gmusicapi` pip package for the [Gmusic Plugin](https://beets.readthedocs.io/en/v1.4.7/plugins/gmusic.html).
 
+Be aware that this forks Dockerfile generates a larger image than the linuxserver image.  
+Also, be aware that this container will take longer to build (due to pip building `lxml`).
+
+
 ## Usage
 
 ```
@@ -38,8 +42,7 @@ Sometimes when using data volumes (`-v` flags) permissions issues can arise betw
 In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as below:
 
 ```
-$ id <dockeruser>
-    uid=1001(dockeruser) gid=1001(dockergroup) groups=1001(dockergroup)
+$ id <dockeruser> uid=1001(dockeruser) gid=1001(dockergroup) groups=1001(dockergroup)
 ```
 
 ## Setting up the application
@@ -69,23 +72,23 @@ Contains [beets-copyartifacts](https://github.com/sbarakat/beets-copyartifacts) 
 
 ## Versions
 
-+ **12.09.18:** Python2 -> python3.
-+ **12.08.18:** Add requests pip package, add gmusicapi pip package.
-+ **04.03.18:** Upgrade mp3gain to 1.6.1.
-+ **02.01.18:** Deprecate cpu_core routine lack of scaling.
-+ **27.12.17:** Add beautifulsoup4 pip package.
-+ **06.12.17:** Rebase to alpine linux 3.7.
-+ **25.05.17:** Rebase to alpine linux 3.6.
-+ **06.02.17:** Rebase to alpine linux 3.5.
-+ **16.01.17:** Add packages required for replaygain.
-+ **24.12.16:** Add [beets-copyartifacts](https://github.com/sbarakat/beets-copyartifacts) plugin.
-+ **07.12.16:** Edit cmake options for chromaprint, should now build and install fpcalc, add gstreamer lib
-+ **14.10.16:** Add version layer information.
-+ **01.10.16:** Add nano and editor variable -
-to allow editing of the config from the container command line.
-+ **30.09.16:** Fix umask.
-+ **24.09.16:** Rebase to alpine linux.
-+ **10.09.16:** Add layer badges to README.
-+ **05.01.16:** Change ffpmeg repository, other version crashes container
-+ **06.11.15:** Initial Release
-+ **29.11.15:** Take out term setting, causing issues with key entry for some users
++ **2018-08-13:** Upgrade to python 3, alpine 3.8, mp3gain 1.6.2.
++ **2018-08-12:** Add requests pip package, add gmusicapi pip package.
++ **2018-03-04:** Upgrade mp3gain to 1.6.1.
++ **2018-01-02:** Deprecate cpu_core routine lack of scaling.
++ **2017-12-27:** Add beautifulsoup4 pip package.
++ **2017-12-06:** Rebase to alpine linux 3.7.
++ **2017-05-25:** Rebase to alpine linux 3.6.
++ **2017-02-06:** Rebase to alpine linux 3.5.
++ **2017-01-16:** Add packages required for replaygain.
++ **2016-12-24:** Add [beets-copyartifacts](https://github.com/sbarakat/beets-copyartifacts) plugin.
++ **2016-12-07:** Edit cmake options for chromaprint, should now build and install fpcalc, add gstreamer lib
++ **2016-10-14:** Add version layer information.
++ **2016-10-01:** Add nano and editor variable - to allow editing of the config from the container command line.
++ **2016-09-30:** Fix umask.
++ **2016-09-24:** Rebase to alpine linux.
++ **2016-09-10:** Add layer badges to README.
++ **2016-01-05:** Change ffpmeg repository, other version crashes container
++ **2015-11-06:** Initial Release
++ **2015-11-29:** Take out term setting, causing issues with key entry for some users
+
